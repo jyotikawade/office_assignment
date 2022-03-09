@@ -58,7 +58,7 @@ def UpdateUser(request, id):
         return serializer.errors
 
 
-def DeleteUser(request,id):
+def DeleteUser(request, id):
     if id is None:
         json_data = request.body
         stream = io.BytesIO(json_data)

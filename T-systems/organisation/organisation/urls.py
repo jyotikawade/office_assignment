@@ -17,19 +17,17 @@ router.register('users', users.views.UserViewSet, basename='users')
 
 """in this list we have defined all url patterns"""
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-
+    path('gettoken/', TokenObtainPairView.as_view(), name='TokenObtainPair'),
+    path('verifytoken/', TokenVerifyView.as_view(), name='TokenVerifyView'),
+    path('refreshtoken/', TokenRefreshView.as_view(), name='TokenRefreshView'),
+    path('auth/', include('rest_framework.urls')),
 ]
 
 
 
 
 
-
-"""
-magic method
-dundor method
-re_path(r'^employee/', employees.views.EmployeeList.as_view()),
-"""
