@@ -5,9 +5,14 @@ from .user_operations import DisplayUser, CreateUser, UpdateUser, DeleteUser
 from rest_framework import viewsets
 from .models import Users
 from .serializers import UserSerializer
+from rest_framework.authentication import BasicAuthentication
+# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class UserViewSet(viewsets.ViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def list(self, request):
         all_User_obj = Users.objects.all()
