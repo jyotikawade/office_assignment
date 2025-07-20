@@ -5,9 +5,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from .employee_operations import CreateEmployee, DisplayEmployee, UpdateEmployee, DeleteEmployee
 from rest_framework import viewsets
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class EmployeeViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request):
         parameter_dict = request.query_params
@@ -72,4 +76,4 @@ class EmployeeViewSet(viewsets.ViewSet):
             return Response({'msg': 'id does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'msg': 'data deleted'}, status=status.HTTP_200_OK)
 
-# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------
